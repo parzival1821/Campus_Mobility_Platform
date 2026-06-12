@@ -1,5 +1,71 @@
 {
-  "passengers": [],
-  "drivers": [],
-  "rides": []
+  "passengers": [
+    {
+      "id": "passenger-1",
+      "name": "Aarav Sharma",
+      "phone": "+91 98765 12001",
+      "hostel": "Rajendra Bhawan"
+    },
+    {
+      "id": "passenger-2",
+      "name": "Meera Nair",
+      "phone": "+91 98765 12002",
+      "hostel": "Sarojini Bhawan"
+    }
+  ],
+  "drivers": [
+    {
+      "id": "driver-1",
+      "name": "Ravi Kumar",
+      "phone": "+91 98765 22001",
+      "vehicleNumber": "UK 08 ER 1421",
+      "vehicleType": "E-rickshaw",
+      "currentLocation": "Library Circle",
+      "online": true,
+      "verified": true
+    },
+    {
+      "id": "driver-2",
+      "name": "Imran Ali",
+      "phone": "+91 98765 22002",
+      "vehicleNumber": "UK 08 ER 2432",
+      "vehicleType": "E-rickshaw",
+      "currentLocation": "Convocation Hall",
+      "online": true,
+      "verified": true
+    },
+    {
+      "id": "driver-3",
+      "name": "Sunita Rawat",
+      "phone": "+91 98765 22003",
+      "vehicleNumber": "UK 08 ER 3288",
+      "vehicleType": "E-rickshaw",
+      "currentLocation": "Cautley Bhawan",
+      "online": false,
+      "verified": true
+    }
+  ],
+  "rides": [
+    {
+      "id": "ride-demo-1",
+      "passengerId": "passenger-2",
+      "driverId": "driver-2",
+      "pickup": "Main Building",
+      "destination": "MAC Auditorium",
+      "seats": 1,
+      "notes": "Rehearsal equipment drop",
+      "status": "completed",
+      "rejectedBy": [],
+      "rating": {
+        "score": 5,
+        "comment": "Quick pickup and smooth ride.",
+        "createdAt": "2026-06-11T09:35:00.000Z"
+      },
+      "requestedAt": "2026-06-11T09:05:00.000Z",
+      "acceptedAt": "2026-06-11T09:07:00.000Z",
+      "startedAt": "2026-06-11T09:12:00.000Z",
+      "completedAt": "2026-06-11T09:32:00.000Z",
+      "cancelledAt": null
+    }
+  ]
 }
