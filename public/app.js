@@ -134,6 +134,7 @@ function render() {
   renderPassengerView();
   renderDriverView();
   renderAdminView();
+  syncActiveRole();
 }
 
 function syncSelections() {
@@ -403,11 +404,17 @@ function rideCard(ride, options = {}) {
 
 function activateRole(role) {
   app.activeRole = role;
+  syncActiveRole();
+}
+
+function syncActiveRole() {
   document.querySelectorAll("[data-role-tab]").forEach((button) => {
-    button.classList.toggle("active", button.dataset.roleTab === role);
+    const isActive = button.dataset.roleTab === app.activeRole;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
   document.querySelectorAll("[data-view]").forEach((view) => {
-    view.classList.toggle("active", view.dataset.view === role);
+    view.classList.toggle("active", view.dataset.view === app.activeRole);
   });
 }
 
