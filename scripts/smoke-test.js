@@ -59,7 +59,7 @@ async function main() {
 
   const created = await post("/api/rides", {
     passengerId: "passenger-1",
-    pickup: "Library Circle",
+    pickup: "Library",
     destination: "MAC Auditorium",
     seats: 2,
     notes: "Smoke test ride"

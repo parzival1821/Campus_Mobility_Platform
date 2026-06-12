@@ -54,7 +54,7 @@ npm run smoke
 
 ## Demonstration Flow
 
-1. Open the Passenger tab and request a ride from `Library Circle` to `MAC Auditorium`.
+1. Open the Passenger tab and request a ride from `Library` to `MAC Auditorium`.
 2. Switch to the Driver tab, keep `Ravi Kumar` online, and accept the incoming ride.
 3. Start the ride, then complete it.
 4. The app switches back to Passenger so the ride can be rated.

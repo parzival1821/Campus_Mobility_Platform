@@ -81,7 +81,7 @@ function makeSeedStore() {
         phone: "+91 98765 22001",
         vehicleNumber: "UK 08 ER 1421",
         vehicleType: "E-rickshaw",
-        currentLocation: "Library Circle",
+        currentLocation: "Library",
         online: true,
         verified: true
       },
