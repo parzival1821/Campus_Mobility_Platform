@@ -12,14 +12,185 @@
         <div>
           <p class="eyebrow">IIT Roorkee Campus Transport</p>
           <h1>Campus Mobility Platform</h1>
+          <p class="header-copy">Live ride requests, driver dispatch, and campus mobility analytics in one operations console.</p>
         </div>
-        <div class="status-pill" id="connectionStatus">Connecting</div>
+        <div class="header-actions">
+          <div class="status-pill" id="connectionStatus">Connecting</div>
+          <button class="ghost-button" id="resetDemoButton" type="button">Reset demo</button>
+        </div>
       </header>
 
-      <section class="panel">
-        <h2>Real-time ride operations</h2>
-        <p>This dashboard will connect passengers, drivers, and coordinators in one live ride workflow.</p>
+      <nav class="role-tabs" aria-label="Dashboard roles">
+        <button class="tab-button active" type="button" data-role-tab="passenger">Passenger</button>
+        <button class="tab-button" type="button" data-role-tab="driver">Driver</button>
+        <button class="tab-button" type="button" data-role-tab="admin">Admin</button>
+      </nav>
+
+      <section class="metric-grid" id="metricGrid" aria-label="System metrics"></section>
+
+      <section class="view-grid active" data-view="passenger">
+        <article class="panel request-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Passenger</p>
+              <h2>Request a campus ride</h2>
+            </div>
+            <span class="mini-badge" id="passengerActiveBadge">No active ride</span>
+          </div>
+
+          <form class="stack-form" id="passengerProfileForm">
+            <label>
+              Passenger profile
+              <select id="passengerSelect"></select>
+            </label>
+            <div class="inline-form">
+              <label>
+                New passenger
+                <input id="newPassengerName" autocomplete="name" placeholder="Name">
+              </label>
+              <button class="secondary-button" type="submit">Add</button>
+            </div>
+          </form>
+
+          <form class="ride-form" id="rideRequestForm">
+            <label>
+              Pickup
+              <input id="pickupInput" required placeholder="Library Circle">
+            </label>
+            <label>
+              Destination
+              <input id="destinationInput" required placeholder="MAC Auditorium">
+            </label>
+            <label>
+              Seats
+              <select id="seatsInput">
+                <option value="1">1 seat</option>
+                <option value="2">2 seats</option>
+                <option value="3">3 seats</option>
+                <option value="4">4 seats</option>
+              </select>
+            </label>
+            <label class="wide-field">
+              Notes
+              <textarea id="notesInput" rows="3" placeholder="Optional pickup details"></textarea>
+            </label>
+            <button class="primary-button wide-field" type="submit">Request ride</button>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Live trip</p>
+              <h2>Passenger ride status</h2>
+            </div>
+          </div>
+          <div id="passengerRideCard" class="empty-state"></div>
+        </article>
       </section>
+
+      <section class="view-grid" data-view="driver">
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Driver</p>
+              <h2>Availability and assignment</h2>
+            </div>
+            <span class="mini-badge" id="driverOnlineBadge">Offline</span>
+          </div>
+
+          <form class="stack-form" id="driverProfileForm">
+            <label>
+              Driver profile
+              <select id="driverSelect"></select>
+            </label>
+            <div class="inline-form">
+              <label>
+                New driver
+                <input id="newDriverName" autocomplete="name" placeholder="Name">
+              </label>
+              <button class="secondary-button" type="submit">Add</button>
+            </div>
+          </form>
+
+          <form class="stack-form" id="availabilityForm">
+            <label>
+              Current location
+              <input id="driverLocationInput" placeholder="Library Circle">
+            </label>
+            <div class="button-row">
+              <button class="primary-button" id="goOnlineButton" type="button">Go online</button>
+              <button class="ghost-button" id="goOfflineButton" type="button">Go offline</button>
+            </div>
+          </form>
+
+          <div id="driverStats" class="compact-stats"></div>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Dispatch queue</p>
+              <h2>Incoming ride requests</h2>
+            </div>
+          </div>
+          <div id="incomingRequests" class="ride-list"></div>
+        </article>
+
+        <article class="panel wide-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Active assignment</p>
+              <h2>Ride lifecycle</h2>
+            </div>
+          </div>
+          <div id="driverActiveRide" class="empty-state"></div>
+        </article>
+      </section>
+
+      <section class="view-grid admin-layout" data-view="admin">
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Operations</p>
+              <h2>Active rides</h2>
+            </div>
+          </div>
+          <div id="activeRidesTable" class="table-wrap"></div>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Fleet</p>
+              <h2>Driver availability</h2>
+            </div>
+          </div>
+          <div id="driversTable" class="table-wrap"></div>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Demand</p>
+              <h2>Popular pickup points</h2>
+            </div>
+          </div>
+          <div id="pickupChart" class="bar-list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">History</p>
+              <h2>Recent rides</h2>
+            </div>
+          </div>
+          <div id="rideHistory" class="ride-list"></div>
+        </article>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
     </main>
     <script src="/app.js"></script>
   </body>
