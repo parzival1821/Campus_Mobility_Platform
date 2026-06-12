@@ -2,11 +2,15 @@
 
 Real-time campus ride management MVP for passenger requests, driver assignment, live ride updates, ratings, and operations analytics.
 
-The app is built for the Cult Open Projects 2026 real-time campus mobility problem statement. It uses a dependency-free Node.js backend, Server-Sent Events for live synchronization, a JSON-backed store, and a responsive dashboard for passengers, drivers, and administrators.
+## Project Overview
 
-## Features
+This project was built for the Cult Open Projects 2026 Real-Time Campus Mobility and Ride Management problem statement. It connects passengers, drivers, and coordinators through one responsive web dashboard.
 
-- Demo passenger and driver profile creation
+The app uses a dependency-free Node.js backend, Server-Sent Events for live synchronization, a JSON-backed store, and role-specific views for Passenger, Driver, and Admin workflows.
+
+## Feature List
+
+- Demo passenger and driver profile creation / login selection
 - Passenger ride requests with pickup, destination, seat count, and notes
 - Driver online/offline availability management
 - Dispatch queue with accept and reject actions
@@ -17,7 +21,21 @@ The app is built for the Cult Open Projects 2026 real-time campus mobility probl
 - File-backed persistence in `data/store.json`
 - Demo reset endpoint for quick walkthroughs
 
-## Run
+## Technology Stack
+
+- Backend: Node.js HTTP server
+- Realtime: Server-Sent Events
+- Frontend: HTML, CSS, vanilla JavaScript
+- Persistence: JSON file store
+- Dependencies: none beyond Node.js
+
+## Setup Instructions
+
+Clone the repository and ensure Node.js is installed.
+
+No package installation is required because the app uses only Node.js built-in modules.
+
+## Running the Application
 
 ```bash
 npm start
@@ -25,21 +43,24 @@ npm start
 
 Open `http://localhost:3000`.
 
-## Tech Stack
+## Verification
 
-- Backend: Node.js HTTP server
-- Realtime: Server-Sent Events
-- Frontend: HTML, CSS, vanilla JavaScript
-- Persistence: JSON file store
-- Dependencies: none
+```bash
+npm run check
+npm run smoke
+```
 
-## Demo Flow
+`npm run check` validates JavaScript syntax. `npm run smoke` exercises the backend health endpoint, SSE stream, ride lifecycle, guardrails, ratings, analytics, and demo reset.
+
+## Demonstration Flow
 
 1. Open the Passenger tab and request a ride from `Library Circle` to `MAC Auditorium`.
 2. Switch to the Driver tab, keep `Ravi Kumar` online, and accept the incoming ride.
 3. Start the ride, then complete it.
 4. The app switches back to Passenger so the ride can be rated.
 5. Submit feedback and open the Admin tab to show updated analytics.
+
+This flow covers the required demo items: registration/profile selection, ride request workflow, ride assignment, realtime updates, driver dashboard, and ratings/feedback.
 
 ## API Overview
 
@@ -53,6 +74,13 @@ Open `http://localhost:3000`.
 - `POST /api/rides/:id/status` moves a ride through lifecycle states.
 - `POST /api/rides/:id/rating` records passenger feedback.
 - `POST /api/reset` restores seeded demo data.
+
+## Design Document
+
+- Markdown source: `PROJECT_REPORT.md`
+- PDF deliverable: `PROJECT_REPORT.pdf`
+
+The report includes problem understanding, system architecture, database schema, ERD, API overview, and design decisions.
 
 ## Resume Bullet
 
