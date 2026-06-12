@@ -147,7 +147,7 @@ function loadStore() {
 
 function saveStore(store, shouldBroadcast = true) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(STORE_PATH, JSON.stringify(store, null, 2));
+  fs.writeFileSync(STORE_PATH, `${JSON.stringify(store, null, 2)}\n`);
   if (shouldBroadcast) {
     broadcastState(store);
   }

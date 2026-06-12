@@ -168,12 +168,12 @@ function renderMetrics() {
 
 function renderProfileSelectors() {
   els.passengerSelect.innerHTML = app.state.passengers
-    .map((passenger) => `<option value="${passenger.id}">${escapeHtml(passenger.name)} · ${escapeHtml(passenger.hostel || "Campus")}</option>`)
+    .map((passenger) => `<option value="${passenger.id}">${escapeHtml(passenger.name)} - ${escapeHtml(passenger.hostel || "Campus")}</option>`)
     .join("");
   els.passengerSelect.value = app.selectedPassengerId;
 
   els.driverSelect.innerHTML = app.state.drivers
-    .map((driver) => `<option value="${driver.id}">${escapeHtml(driver.name)} · ${escapeHtml(driver.vehicleNumber)}</option>`)
+    .map((driver) => `<option value="${driver.id}">${escapeHtml(driver.name)} - ${escapeHtml(driver.vehicleNumber)}</option>`)
     .join("");
   els.driverSelect.value = app.selectedDriverId;
 }
@@ -208,11 +208,11 @@ function renderPassengerView() {
         <label>
           Rating
           <select name="score">
-            <option value="5">5 · Excellent</option>
-            <option value="4">4 · Good</option>
-            <option value="3">3 · Average</option>
-            <option value="2">2 · Poor</option>
-            <option value="1">1 · Bad</option>
+            <option value="5">5 - Excellent</option>
+            <option value="4">4 - Good</option>
+            <option value="3">3 - Average</option>
+            <option value="2">2 - Poor</option>
+            <option value="1">1 - Bad</option>
           </select>
         </label>
         <label>
@@ -382,7 +382,7 @@ function rideCard(ride, options = {}) {
       <div class="ride-card-header">
         <div>
           <div class="ride-title">${escapeHtml(ride.passenger?.name || "Passenger ride")}</div>
-          <div class="ride-meta">Requested ${formatTime(ride.requestedAt)} · ${ride.seats} seat${ride.seats > 1 ? "s" : ""}</div>
+          <div class="ride-meta">Requested ${formatTime(ride.requestedAt)} - ${ride.seats} seat${ride.seats > 1 ? "s" : ""}</div>
         </div>
         ${statusBadge(ride.status)}
       </div>
@@ -394,7 +394,7 @@ function rideCard(ride, options = {}) {
       <div class="ride-meta">
         Driver: ${escapeHtml(ride.driver?.name || "Unassigned")}
         ${ride.notes ? `<br>Notes: ${escapeHtml(ride.notes)}` : ""}
-        ${ride.rating ? `<br>Rating: ${ride.rating.score}/5 · ${escapeHtml(ride.rating.comment || "No comment")}` : ""}
+        ${ride.rating ? `<br>Rating: ${ride.rating.score}/5 - ${escapeHtml(ride.rating.comment || "No comment")}` : ""}
       </div>
       ${options.actions ? `<div class="button-row">${options.actions}</div>` : ""}
     </div>

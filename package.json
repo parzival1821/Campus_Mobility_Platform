@@ -4,7 +4,9 @@
   "description": "Real-time campus ride management MVP using Node.js and Server-Sent Events.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js",
+    "smoke": "node scripts/smoke-test.js"
   },
   "keywords": [
     "campus",
