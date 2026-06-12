@@ -26,6 +26,9 @@ const els = {
   activeRidesTable: document.querySelector("#activeRidesTable"),
   driversTable: document.querySelector("#driversTable"),
   pickupChart: document.querySelector("#pickupChart"),
+  destinationChart: document.querySelector("#destinationChart"),
+  driverPerformance: document.querySelector("#driverPerformance"),
+  feedbackList: document.querySelector("#feedbackList"),
   rideHistory: document.querySelector("#rideHistory")
 };
 
@@ -299,7 +302,10 @@ function renderAdminView() {
     "No drivers registered."
   );
 
-  renderPickupChart();
+  renderBarChart(els.pickupChart, app.analytics?.popularPickups || [], "Demand chart appears after ride requests.");
+  renderBarChart(els.destinationChart, app.analytics?.popularDestinations || [], "Destination chart appears after ride requests.");
+  renderDriverPerformance();
+  renderFeedbackList();
   els.rideHistory.innerHTML = app.state.rides.length
     ? app.state.rides.slice(0, 8).map((ride) => rideCard(ride)).join("")
     : `<div class="empty-state">No rides yet.</div>`;
@@ -317,11 +323,10 @@ function tableHtml(headers, rows, emptyText) {
   `;
 }
 
-function renderPickupChart() {
-  const pickups = app.analytics?.popularPickups || [];
-  const max = pickups[0]?.count || 1;
-  els.pickupChart.innerHTML = pickups.length
-    ? pickups.map((item) => `
+function renderBarChart(element, items, emptyText) {
+  const max = items[0]?.count || 1;
+  element.innerHTML = items.length
+    ? items.map((item) => `
         <div class="bar-row">
           <div class="bar-row-top">
             <span>${escapeHtml(item.label)}</span>
@@ -330,7 +335,45 @@ function renderPickupChart() {
           <div class="bar-track"><div class="bar-fill" style="width: ${(item.count / max) * 100}%"></div></div>
         </div>
       `).join("")
-    : `<div class="empty-state">Demand chart appears after ride requests.</div>`;
+    : `<div class="empty-state">${emptyText}</div>`;
+}
+
+function renderDriverPerformance() {
+  const rows = [...(app.analytics?.driverPerformance || [])]
+    .sort((a, b) => b.completedRides - a.completedRides || (b.averageRating || 0) - (a.averageRating || 0))
+    .map((driver) => [
+      escapeHtml(driver.name),
+      String(driver.completedRides),
+      driver.averageRating ?? "N/A",
+      driver.activeRideId ? "On ride" : driver.online ? "Available" : "Offline"
+    ]);
+
+  els.driverPerformance.innerHTML = tableHtml(
+    ["Driver", "Completed", "Rating", "Status"],
+    rows,
+    "No driver activity yet."
+  );
+}
+
+function renderFeedbackList() {
+  const feedback = app.state.rides
+    .filter((ride) => ride.rating)
+    .slice(0, 5);
+
+  els.feedbackList.innerHTML = feedback.length
+    ? feedback.map((ride) => `
+        <div class="history-card">
+          <div class="ride-card-header">
+            <div>
+              <div class="ride-title">${escapeHtml(ride.driver?.name || "Driver")}</div>
+              <div class="ride-meta">${escapeHtml(ride.pickup)} to ${escapeHtml(ride.destination)}</div>
+            </div>
+            <span class="status-badge completed">${ride.rating.score}/5</span>
+          </div>
+          <p class="ride-meta">${escapeHtml(ride.rating.comment || "No written feedback")}</p>
+        </div>
+      `).join("")
+    : `<div class="empty-state">Passenger feedback appears after completed rides are rated.</div>`;
 }
 
 function rideCard(ride, options = {}) {
