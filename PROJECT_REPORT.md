@@ -276,4 +276,10 @@ npm run smoke
 
 ## Submission Readiness
 
-The repository includes source code, configuration, documentation, a reproducible run command, a smoke test, and this design report. The remaining external deliverable is the maximum three-minute demonstration video showing registration/profile selection, ride request, assignment, realtime updates, driver dashboard, and ratings.
+The repository includes source code, configuration, documentation, a reproducible run command, a smoke test, and this design report. The recorded demonstration video is available at:
+
+```text
+https://vimeo.com/1200839423?share=copy&fl=sv&fe=ci
+```
+
+The video shows registration/profile selection, ride request, assignment, realtime updates, driver dashboard, and ratings.

@@ -62,6 +62,10 @@ npm run smoke
 
 This flow covers the required demo items: registration/profile selection, ride request workflow, ride assignment, realtime updates, driver dashboard, and ratings/feedback.
 
+## Demonstration Video
+
+Recorded demo: https://vimeo.com/1200839423?share=copy&fl=sv&fe=ci
+
 ## API Overview
 
 - `GET /api/state` returns passengers, drivers, rides, and analytics.
